@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -342,11 +342,13 @@ namespace automap
             var result = new StringBuilder();
             
             List<string> curs = new List<string>();
+            bool[] negatedx = new bool[xv.Length];
             bool[] cx= new bool[xv.Length];
             for (int j = 0; j < cx.Length; j++)
             {
                 cx[j] = true;
             }
+            bool[] negatedy = new bool[yv.Length];
             bool[] cy = new bool[yv.Length];
             for (int j = 0; j < cy.Length; j++)
             {
@@ -364,12 +366,17 @@ namespace automap
                     for (int k = 0; k < curs[j].Length; k++)
                     {
                         if (curs[i][k] != curs[j][k]) cx[k] = false;
+                        else if (curs[i][k] == '0') negatedx[k] = true;
                     }
                 }
             }
             for (int i = 0; i < cx.Length; i++)
             {
-                if (cx[i]) result.Append(xv[i]);
+                if (cx[i])
+                {
+                    result.Append(xv[i]);
+                    if (negatedx[i]) result.Append('\'');
+                }
             }
             curs = new List<string>();
             for (int i = y1 ;; i = tile(i + 1, max_y))
@@ -384,12 +391,18 @@ namespace automap
                     for (int k = 0; k < curs[j].Length; k++)
                     {
                         if (curs[i][k] != curs[j][k]) cy[k] = false;
+                        else if (curs[i][k] == '0') negatedy[k] = true;
                     }
                 }
             }
             for (int i = 0; i < cy.Length; i++)
             {
-                if (cy[i]) result.Append(yv[i]);
+                if (cy[i])
+                {
+                    result.Append(yv[i]);
+                    if (negatedy[i])
+                        result.Append('\'');
+                }
             }
             return result.ToString();
         }
