@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace automap
 {
@@ -37,13 +38,14 @@ namespace automap
         }
         public Program()
         {
+           
             int[,] v ={
                 {0,0,0,1},
-                {0,0,1,1},
+                {0,0,1,0},
                 {0,1,0,0},
                 {0,1,1,1},
                 {1,0,0,0},
-                {1,0,1,1},
+                {1,0,1,0},
                 {1,1,0,0},
                 {1,1,1,1},
             };
@@ -153,10 +155,11 @@ namespace automap
             groups = section.expand(groups);
             for (int i = 0; i < groups.Count; )
             {
-                if (groups[i].size % 2 == 1) groups.RemoveAt(i);
+                if (groups[i].size % 2 == 1&& groups[i].size!=1) groups.RemoveAt(i);
                 else i++;
             }
             sb = new StringBuilder();
+
             while (true)
             {
                 int max = groups[0].size;
