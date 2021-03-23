@@ -1,4 +1,4 @@
 # Karnaugh-map-Generator
 ## This is a prototype
 
-## From truth table array generataes a Karnaugh map
+## From truth table array generates reduced equation using Karnaugh map
