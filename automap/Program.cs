@@ -153,9 +153,13 @@ namespace automap
                 }
             }
             groups = section.expand(groups);
+            bool IsPowerOfTwo(int x)
+            {
+                return (x != 0) && ((x & (x - 1)) == 0);
+            }
             for (int i = 0; i < groups.Count; )
             {
-                if (groups[i].size % 2 == 1&& groups[i].size!=1) groups.RemoveAt(i);
+                if (!IsPowerOfTwo(groups[i].size)&& groups[i].size!=1) groups.RemoveAt(i);
                 else i++;
             }
             sb = new StringBuilder();
