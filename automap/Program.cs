@@ -33,6 +33,13 @@ namespace automap
                     swap(lines, i, i - 1);
                 }
             }
+            for (int j = 5; j < Math.Pow(p, c); j = j * 2 + 1)
+            {
+                for (int i = j; i < lines.Count; i += j)
+                {
+                    swap(lines, i, i - 1);
+                }
+            }
             return lines;
             
         }
